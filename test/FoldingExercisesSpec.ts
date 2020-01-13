@@ -7,12 +7,19 @@ describe('FoldingExercisesSpec', () => {
 
     it('foldLeft', () => {
         expect(foldLeft<number, number>(0, [1, 2, 3])((b, a) => b + a)).equal(6);
+        expect(foldLeft<number, number>(0, [])((b, a) => b + a)).equal(0);
+
         expect(foldLeft<number, number[]>([], [1, 2, 3])((b, a) => [a, ...b])).eql([3, 2, 1]);
+        expect(foldLeft<number, number[]>([], [])((b, a) => [a, ...b])).eql([]);
+
     });
 
     it('foldRight', () => {
         expect(foldRight<number, number>(0, [1, 2, 3])((b, a) => b + a)).equal(6);
+        expect(foldRight<number, number>(0, [])((b, a) => b + a)).equal(0);
+
         expect(foldRight<number, number[]>([], [1, 2, 3])((a, b) => [a, ...b])).eql([1, 2, 3]);
+        expect(foldRight<number, number[]>([], [])((a, b) => [a, ...b])).eql([]);
     });
 
     it('Sum of [1,2,3,4,5,6] = 21', () => {

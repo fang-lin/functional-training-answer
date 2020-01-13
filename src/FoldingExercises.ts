@@ -30,7 +30,7 @@ export namespace Folding {
 
     export const foldLeft = <A, B>(initialValue: B, list: A[]) => (f: (b: B, a: A) => B): B => {
         const [first, ...tail] = list;
-        return isEmpty(tail) ? f(initialValue, first) : foldLeft(f(initialValue, first), tail)(f);
+        return isEmpty(list) ? initialValue : foldLeft(f(initialValue, first), tail)(f);
     };
 
     /**
@@ -39,7 +39,7 @@ export namespace Folding {
 
     export const foldRight = <A, B>(initialValue: B, list: A[]) => (f: (a: A, b: B) => B): B => {
         const {ahead, last} = getAheadLast(list);
-        return isEmpty(ahead) ? f(last, initialValue) : foldRight(f(last, initialValue), ahead)(f);
+        return isEmpty(list) ? initialValue : foldRight(f(last, initialValue), ahead)(f);
     };
 
     /**
